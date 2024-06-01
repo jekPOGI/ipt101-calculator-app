@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator App</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: lavender;
+        }
+
+        #calculator {
+            text-align: center;
+            background-color: beige;
+            padding: 20px;
+            border-radius: 10px;
+            border: 5px solid black;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+            width: 320px;
+        }
+
+        #header {
+            grid-column: span 4;
+            margin-bottom: 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        #result {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: right;
+            background-color: greenyellow;
+            grid-column: span 4;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        .num-btn, .opp-btn {
+            padding: 20px;
+            border-radius: 10px;
+            color: black;
+            border: 2px solid slategray;
+            margin: 2px;
+            font-size: 18px;
+        }
+
+        .opp-btn {
+            background-color: lightgray;
+        }
+
+        .num-btn {
+            background-color: white;
+        }
+
+        .span-2 {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculator">
+        <div id="header">Calculator</div>
+        <input type="text" id="result" disabled>
+        <input type="button" class="opp-btn span-2" value="C" onclick="clearInput()">
+        <input type="button" class="opp-btn" value="DEL" onclick="backspace()">
+        <input type="button" class="opp-btn" value="/" onclick="appendOperator('/')">
+        <input type="button" class="num-btn" value="1" onclick="appendNumber(1)">
+        <input type="button" class="num-btn" value="2" onclick="appendNumber(2)">
+        <input type="button" class="num-btn" value="3" onclick="appendNumber(3)">
+        <input type="button" class="opp-btn" value="*" onclick="appendOperator('*')">
+        <input type="button" class="num-btn" value="4" onclick="appendNumber(4)">
+        <input type="button" class="num-btn" value="5" onclick="appendNumber(5)">
+        <input type="button" class="num-btn" value="6" onclick="appendNumber(6)">
+        <input type="button" class="opp-btn" value="-" onclick="appendOperator('-')">
+        <input type="button" class="num-btn" value="7" onclick="appendNumber(7)">
+        <input type="button" class="num-btn" value="8" onclick="appendNumber(8)">
+        <input type="button" class="num-btn" value="9" onclick="appendNumber(9)">
+        <input type="button" class="opp-btn" value="+" onclick="appendOperator('+')">
+        <input type="button" class="opp-btn" value="." onclick="appendOperator('.')">
+        <input type="button" class="num-btn" value="0" onclick="appendNumber(0)">
+        <input type="button" class="opp-btn span-2" value="=" onclick="calculate()">
+    </div>
+
+    <script>
+        let currentInput = '';
+
+        function appendNumber(number) {
+            currentInput += number;
+            document.getElementById('result').value = currentInput;
+        }
+
+        function appendOperator(operator) {
+            currentInput += operator;
+            document.getElementById('result').value = currentInput;
+        }
+
+        function calculate() {
+            try {
+                currentInput = eval(currentInput).toString();
+            } catch {
+                currentInput = 'Error';
+            }
+            document.getElementById('result').value = currentInput;
+        }
+
+        function clearInput() {
+            currentInput = '';
+            document.getElementById('result').value = '';
+        }
+
+        function backspace() {
+            currentInput = currentInput.slice(0, -1);
+            document.getElementById('result').value = currentInput;
+        }
+    </script>
+</body>
+</html>
